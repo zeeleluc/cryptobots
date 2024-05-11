@@ -1,14 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import WalletConnect from './WalletConnect';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
+import Moralis from "moralis";
+
+Moralis.start({
+    apiKey: process.env.MORALIS_API_KEY
+});
 
 ReactDOM.render(
     <React.StrictMode>
-        <App />
+        <WalletConnect />
     </React.StrictMode>,
-    document.getElementById('root')
+    document.getElementById('wallet-connect')
 );
 
 // If you want to start measuring performance in your app, pass a function

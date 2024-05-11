@@ -1,6 +1,17 @@
-const { ProvidePlugin } = require('webpack');
+const { override } = require('customize-cra');
+const { ProvidePlugin, DefinePlugin } = require('webpack'); // Import webpack modules
+const dotenv = require('dotenv');
 
-module.exports = function (config, env) {
+module.exports = override((config) => {
+    // Load environment variables from .env files
+    const envConfig = dotenv.config().parsed;
+    if (envConfig) {
+        Object.keys(envConfig).forEach((key) => {
+            config.plugins.push(new DefinePlugin({ ['process.env.' + key]: JSON.stringify(envConfig[key]) }));
+        });
+    }
+
+    // Add other customizations
     return {
         ...config,
         module: {
@@ -41,4 +52,4 @@ module.exports = function (config, env) {
         },
         ignoreWarnings: [/Failed to parse source map/],
     };
-};
+});

@@ -18,7 +18,7 @@
         "tsconfig.json"
     ],
     "scripts": {
-        "build": "tsc --build --verbose && react-app-rewired build",
+        "build": "react-app-rewired build",
         "clean": "shx mkdir -p build lib && shx rm -rf build lib",
         "lint": "prettier --check 'src/{*,**/*}.{ts,tsx,js,jsx,json}' && eslint",
         "start": "react-app-rewired start",
@@ -27,11 +27,15 @@
         "eject": "react-scripts eject"
     },
     "dependencies": {
+        "@moralisweb3/common-evm-utils": "^2.26.1",
         "@solana/wallet-adapter-base": "workspace:^",
         "@solana/wallet-adapter-react": "workspace:^",
         "@solana/wallet-adapter-react-ui": "workspace:^",
         "@solana/wallet-adapter-wallets": "workspace:^",
         "@solana/web3.js": "^1.77.3",
+        "customize-cra": "^1.0.0",
+        "dotenv": "^16.4.5",
+        "moralis": "^2.26.1",
         "react": "^18.2.0",
         "react-app-rewired": "^2.2.1",
         "react-dom": "^18.2.0",
