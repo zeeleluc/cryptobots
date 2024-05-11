@@ -3,7 +3,7 @@ namespace App\Action\Actions;
 
 use App\Action\BaseAction;
 
-class TestAction extends BaseAction
+class PushWalletAddress extends BaseAction
 {
     public function run(): array
     {

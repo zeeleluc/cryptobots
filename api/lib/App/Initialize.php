@@ -3,6 +3,7 @@ namespace App;
 
 use App\Action\Action as AbstractAction;
 use App\Action\Actions\HomeAction;
+use App\Action\Actions\PushWalletAddress;
 use App\Action\Actions\TestAction;
 use App\Action\BaseAction;
 use App\Object\BaseObject;
@@ -37,10 +38,15 @@ class Initialize extends BaseObject
     {
         $get = $this->getRequest()->get();
 
+        if (is_cli()) {
+            (new Action\Actions\Cli())->run();
+            exit;
+        }
+
         if (false === isset($get['action']) || (true === isset($get['action']) && '' === $get['action'])) {
             return new HomeAction();
-        } elseif ($get['action'] === 'test') {
-            return new TestAction();
+        } elseif ($get['action'] === 'push-wallet-address') {
+            return new PushWalletAddress();
         }
 
         exit(json_encode(['error' => 'Action not found.']));
