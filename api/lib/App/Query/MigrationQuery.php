@@ -1,6 +1,8 @@
 <?php
 namespace App\Query;
 
+use App\Slack;
+
 class MigrationQuery extends Query
 {
 
@@ -31,7 +33,9 @@ class MigrationQuery extends Query
             $this->db->rawQuery($sql);
             $this->addMigrationDone('sql-' . $identifier);
             return true;
-        } catch (\Exception $exception) {
+        } catch (\Exception $e) {
+            $slack = new Slack();
+            $slack->sendErrorMessage($e->getMessage());
             return false;
         }
     }

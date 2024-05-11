@@ -1,9 +1,12 @@
-import React, { FC, ReactNode, useMemo } from 'react';
+import React, { FC, ReactNode, useMemo, useEffect } from 'react';
 import { WalletAdapterNetwork } from '@solana/wallet-adapter-base';
-import { ConnectionProvider, WalletProvider, useConnection, useWallet } from '@solana/wallet-adapter-react';
-import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui'; // Remove useWallet import
+import { ConnectionProvider, WalletProvider, useWallet } from '@solana/wallet-adapter-react';
+import { WalletModalProvider, WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { clusterApiUrl } from '@solana/web3.js';
-import BalanceDisplay from './BalanceDisplay'; // Assuming BalanceDisplay is in a file named BalanceDisplay.tsx
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
+
+import BalanceDisplay from './BalanceDisplay';
 
 require('./WalletConnect.css');
 require('@solana/wallet-adapter-react-ui/styles.css');
@@ -26,6 +29,13 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
         [network]
     );
 
+    // Generate or retrieve a unique session ID and store it in session storage
+    let sessionId = sessionStorage.getItem('sessionId');
+    if (!sessionId) {
+        sessionId = uuidv4();
+        sessionStorage.setItem('sessionId', sessionId);
+    }
+
     return (
         <ConnectionProvider endpoint={endpoint}>
             <WalletProvider wallets={wallets} autoConnect>
@@ -34,9 +44,23 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
         </ConnectionProvider>
     );
 };
-
 const Content: FC = () => {
-    const { publicKey } = useWallet(); // Corrected import statement
+    const { publicKey } = useWallet();
+
+    useEffect(() => {
+        if (publicKey) {
+            pushWalletAddress(publicKey.toBase58());
+        }
+    }, [publicKey]);
+
+    const pushWalletAddress = async (walletAddress: string) => {
+        try {
+            const sessionId = sessionStorage.getItem('sessionId');
+            await axios.post(process.env.APP_API_URL + '/push-wallet-address', { walletAddress, sessionId }); // Include sessionId in the payload
+        } catch (error) {
+            console.error('Error pushing wallet address to the server:', error);
+        }
+    };
 
     return (
         <div className="App">
