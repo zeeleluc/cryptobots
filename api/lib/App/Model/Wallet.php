@@ -59,8 +59,10 @@ class Wallet extends BaseModel
         }
         $array['identifier'] = $this->identifier;
         $array['address'] = $this->address;
-        if ($this->balance) {
+        if (is_numeric($this->balance)) {
             $array['balance'] = $this->balance;
+        } else {
+            $array['balance'] = null;
         }
         if ($this->createdAt) {
             $array['created_at'] = $this->createdAt;
@@ -77,7 +79,7 @@ class Wallet extends BaseModel
      */
     public function save()
     {
-        if ($this->getQueryObject()->doesIdentifierExist($this->identifier)) {
+        if ($this->getQueryObject()->doesIdentifierAndWalletExist($this->identifier, $this->address)) {
             return $this->update();
         } else {
 
@@ -96,8 +98,9 @@ class Wallet extends BaseModel
     {
         $values = $this->toArray();
         $values['updated_at'] = Carbon::now();
+        unset($values['id']);
 
-        return $this->getQueryObject()->updateWalletByIdentifier($this->identifier, $values);
+        return $this->getQueryObject()->updateWalletByIdentifierAndAddress($this->identifier, $this->address, $values);
     }
 
     public function delete()

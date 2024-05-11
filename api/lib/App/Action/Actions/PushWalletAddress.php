@@ -3,7 +3,6 @@ namespace App\Action\Actions;
 
 use App\Action\BaseAction;
 use App\Model\Wallet;
-use App\Slack;
 
 class PushWalletAddress extends BaseAction
 {
@@ -13,11 +12,14 @@ class PushWalletAddress extends BaseAction
         $sessionId = $this->getRequest()->getPostParam('sessionId');
 
         if ($address && $sessionId) {
-            $wallet = new Wallet();
-            $wallet->initNew([
-                'identifier' => $sessionId,
-                'address' => $address,
-            ]);
+
+            if (!$this->getWalletQuery()->doesIdentifierAndWalletExist($sessionId, $address)) {
+                $wallet = new Wallet();
+                $wallet->initNew([
+                    'identifier' => $sessionId,
+                    'address' => $address,
+                ]);
+            }
 
             return ['Wallet address stored.'];
         }

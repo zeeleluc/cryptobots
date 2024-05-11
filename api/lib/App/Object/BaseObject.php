@@ -2,6 +2,7 @@
 namespace App\Object;
 
 use App\Action\Action;
+use App\Query\WalletQuery;
 use App\Request;
 use App\Session;
 
@@ -34,5 +35,10 @@ abstract class BaseObject
     public function getAbstractAction(): Action
     {
         return ObjectManager::getOne('App\Action\Action');
+    }
+
+    public function getWalletQuery(): WalletQuery
+    {
+        return ObjectManager::getOne('App\Query\WalletQuery');
     }
 }

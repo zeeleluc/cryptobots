@@ -27,7 +27,7 @@ class WalletQuery extends Query
         return $this->getWalletByIdentifier(Arr::get($values, 'identifier'));
     }
 
-    public function updateWalletByIdentifier(string $identifier, array $values)
+    public function updateWalletByIdentifierAndAddress(string $identifier, string $address, array $values)
     {
         foreach ($values as $key => $value) {
             if ($value instanceof Carbon) {
@@ -35,7 +35,10 @@ class WalletQuery extends Query
             }
         }
 
-        $result = $this->db->where('identifier', $identifier)->update($this->table, $values);
+        $result = $this->db
+            ->where('identifier', $identifier)
+            ->where('address', $address)
+            ->update($this->table, $values);
         if (!$result) {
             $slack = new Slack();
             $slack->sendErrorMessage('Wallet for identifier `' . $identifier . '` not updated.');
@@ -51,6 +54,14 @@ class WalletQuery extends Query
             ->get($this->table);
     }
 
+    public function doesIdentifierAndWalletExist(string $identifier, string $address): bool
+    {
+        return (bool) $this->db
+            ->where('identifier', $identifier)
+            ->where('address', $address)
+            ->get($this->table);
+    }
+
     public function doesIdentifierExist(string $identifier): bool
     {
         return (bool) $this->db
@@ -62,6 +73,20 @@ class WalletQuery extends Query
     {
         $results = $this->db
             ->where('identifier', $identifier)
+            ->getOne($this->table);
+
+        if ($results) {
+            return (new Wallet())->fromArray($results);
+        }
+
+        return null;
+    }
+
+    public function getWalletByIdentifierAndAddress(string $identifier, string $address): ?Wallet
+    {
+        $results = $this->db
+            ->where('identifier', $identifier)
+            ->where('address', $address)
             ->getOne($this->table);
 
         if ($results) {

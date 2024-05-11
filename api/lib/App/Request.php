@@ -12,7 +12,7 @@ class Request
     public function __construct()
     {
         $this->get = $_GET;
-        $this->post = json_decode(file_get_contents('php://input'), true);
+        $this->post = json_decode(file_get_contents('php://input'), true) ?: [];
         if (!$this->isCli()) {
             $this->requestMethod = $_SERVER['REQUEST_METHOD'];
         }
