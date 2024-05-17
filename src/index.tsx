@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import WalletConnect from './WalletConnect';
+import NFTList from './NFTList';
+import './bootstrap.min.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Moralis from "moralis";
@@ -10,21 +12,19 @@ Moralis.start({
     apiKey: process.env.MORALIS_API_KEY
 });
 
-// Generate or retrieve a unique identifier from session storage
 let sessionId = sessionStorage.getItem('sessionId');
 if (!sessionId) {
-    sessionId = uuidv4(); // Generate a new UUID if not found
-    sessionStorage.setItem('sessionId', sessionId); // Store the UUID in session storage
+    sessionId = uuidv4();
+    sessionStorage.setItem('sessionId', sessionId);
 }
 
 ReactDOM.render(
     <React.StrictMode>
-        <WalletConnect />
+        <WalletConnect>
+            <NFTList />
+        </WalletConnect>
     </React.StrictMode>,
-    document.getElementById('wallet-connect')
+    document.getElementById('root')
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
