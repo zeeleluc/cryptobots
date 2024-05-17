@@ -80,23 +80,8 @@ const NFTList: React.FC = () => {
         }
     };
 
-    const mintNFT = async () => {
-        try {
-            if (!publicKey) {
-                console.error('Wallet not connected');
-                return;
-            }
-
-            // Call the minting method here
-            console.log('Minting NFT...');
-        } catch (error) {
-            console.error('Error minting NFT:', error);
-        }
-    };
-
     return (
         <div className="row">
-            <button onClick={mintNFT}>Mint NFT</button>
             {nfts ? (
                 nfts.map((nft: any, index: number) => (
                     <div className="col-md-4 mb-4" key={index}>
