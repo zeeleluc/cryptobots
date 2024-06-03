@@ -2,6 +2,7 @@
 namespace App\Object;
 
 use App\Action\Action;
+use App\Query\TokenHashQuery;
 use App\Query\WalletQuery;
 use App\Request;
 use App\Session;
@@ -40,5 +41,10 @@ abstract class BaseObject
     public function getWalletQuery(): WalletQuery
     {
         return ObjectManager::getOne('App\Query\WalletQuery');
+    }
+
+    public function getTokenHashQuery(): TokenHashQuery
+    {
+        return ObjectManager::getOne('App\Query\TokenHashQuery');
     }
 }

@@ -24,6 +24,13 @@ class TokenHashQuery extends Query
         return $this->getTokenHashByHash($hash);
     }
 
+    public function getAllHashes(): array
+    {
+        $result = $this->db->get($this->table, null, 'hash');
+
+        return array_column($result, 'hash');
+    }
+
     public function doesTokenHashExist(string $hash): bool
     {
         return (bool) $this->db

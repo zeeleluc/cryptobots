@@ -2,6 +2,7 @@
 namespace App;
 
 use App\Action\Action as AbstractAction;
+use App\Action\Actions\GetAllHashes;
 use App\Action\Actions\GetBalance;
 use App\Action\Actions\HomeAction;
 use App\Action\Actions\PushWalletAddress;
@@ -9,6 +10,7 @@ use App\Action\Actions\SetBalance;
 use App\Action\BaseAction;
 use App\Object\BaseObject;
 use App\Object\ObjectManager;
+use App\Query\TokenHashQuery;
 use App\Query\WalletQuery;
 
 class Initialize extends BaseObject
@@ -20,6 +22,7 @@ class Initialize extends BaseObject
         ObjectManager::set(new AbstractAction());
 
         ObjectManager::set(new WalletQuery());
+        ObjectManager::set(new TokenHashQuery());
     }
 
     public function action(): Initialize
@@ -55,6 +58,8 @@ class Initialize extends BaseObject
             return new SetBalance();
         } elseif ($get['action'] === 'get-balance') {
             return new GetBalance();
+        } elseif ($get['action'] === 'get-all-hashes') {
+            return new GetAllHashes();
         }
 
         exit(json_encode(['error' => 'Action not found.']));
