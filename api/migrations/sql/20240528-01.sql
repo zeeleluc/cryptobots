@@ -1,0 +1,4 @@
+CREATE TABLE token_hashes (
+    id INT PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    hash VARCHAR(255) NOT NULL
+);

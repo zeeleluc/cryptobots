@@ -17,6 +17,13 @@ if (!function_exists('env')) {
     }
 }
 
+if (!function_exists('is_local')) {
+    function is_local(): bool
+    {
+        return env('ENV') === 'local';
+    }
+}
+
 if (!function_exists('is_cli')) {
     function is_cli() {
         if ( defined('STDIN') ) {
