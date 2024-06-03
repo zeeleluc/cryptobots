@@ -3,11 +3,21 @@ namespace App\Action\Actions;
 
 use App\Action\BaseAction;
 
-class GetAllHashes extends BaseAction
+class HasHash extends BaseAction
 {
     public function run(): array
     {
-        return $this->getAllHashes();
+        $hash = $this->getRequest()->getParam('hash');
+        if (!$hash) {
+            return [
+                'has_hash' => false,
+            ];
+        }
+
+        $allHashes = $this->getAllHashes();
+        return [
+            'has_hash' => in_array($hash, $allHashes),
+        ];
     }
 
     private function getAllHashes()
