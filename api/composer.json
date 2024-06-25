@@ -5,7 +5,10 @@
         "jolicode/slack-php-api": "^4.7",
         "symfony/http-client": "^7.0",
         "nesbot/carbon": "^3.3",
-        "jdrieghe/array-helpers": "^0.2.0"
+        "jdrieghe/array-helpers": "^0.2.0",
+        "attestto/solana-php-sdk": "dev-master",
+        "phpseclib/phpseclib": "~3.0",
+        "tatumio/tatum-php": "dev-master"
     },
     "config": {
         "allow-plugins": {

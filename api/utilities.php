@@ -4,9 +4,9 @@
  * return null|string
  */
 if (!function_exists('env')) {
-    function env (string $key)
+    function env(string $key)
     {
-        $dotenv = \Dotenv\Dotenv::createImmutable(__DIR__);
+        $dotenv = \Dotenv\Dotenv::createImmutable(str_replace('/api', '', __DIR__));
         $dotenv->load();
 
         if (!array_key_exists($key, $_ENV)) {
