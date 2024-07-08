@@ -6,6 +6,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 
 const NFTList: React.FC = () => {
     const [nfts, setNFTs] = useState<any[] | null>(null);
+    const [loading, setLoading] = useState<boolean>(true);
     const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=' + process.env.HELIUS_API_KEY); // Update with your preferred RPC endpoint
     const { publicKey, signTransaction } = useWallet();
 
@@ -22,9 +23,22 @@ const NFTList: React.FC = () => {
                 const response = await Moralis.SolApi.account.getNFTs(options);
                 const nftsArray = Object.values(response)[0];
                 console.log("NFTs:", nftsArray);
-                setNFTs(nftsArray);
+
+                // Filter NFTs based on the has-hash check
+                const filteredNFTs = await Promise.all(nftsArray.map(async (nft: any) => {
+                    const mint = nft.mint;
+                    const metadataUrl = `${process.env.APP_API_URL}/has-hash/${mint}`;
+                    const result = await fetch(metadataUrl);
+                    const data = await result.json();
+                    return data.has_hash ? nft : null;
+                }));
+
+                const validNFTs = filteredNFTs.filter((nft: any) => nft !== null);
+                setNFTs(validNFTs);
+                setLoading(false);
             } catch (error) {
                 console.error('Error fetching NFTs:', error);
+                setLoading(false);
             }
         };
 
@@ -81,34 +95,42 @@ const NFTList: React.FC = () => {
     };
 
     return (
-        <div className="row">
-            {nfts ? (
-                nfts.map((nft: any, index: number) => (
-                    <div className="col-md-4 mb-4" key={index}>
-                        <div className="card">
-                            <div className="card-header">{nft.name}</div>
-                            <div className="card-body">
-                                associatedTokenAddress<br />
-                                {nft.associatedTokenAddress}<br />
-                                <br />
-                                mint<br />
-                                {nft.mint}<br />
-                                <br />
-                                symbol<br />
-                                {nft.symbol}<br />
-                                <br />
-                                <img src={nft.image} alt={nft.name} className="card-img-top" />
-                                <br />
-                                <button onClick={() => burnNFT(nft)} className="btn btn-danger mt-3">
-                                    Burn NFT
-                                </button>
+        <div className="container-fluid">
+            <div className="row">
+                {loading ? (
+                    <div className="col">
+                        <h2>Loading Cryptobots...</h2>
+                    </div>
+                ) : nfts && nfts.length > 0 ? (
+                    nfts.map((nft: any, index: number) => (
+                        <div className="col col-md-4 mb-4" key={index}>
+                            <div className="card">
+                                <div className="card-header">{nft.name}</div>
+                                <div className="card-body">
+                                    associatedTokenAddress<br />
+                                    {nft.associatedTokenAddress}<br />
+                                    <br />
+                                    mint<br />
+                                    {nft.mint}<br />
+                                    <br />
+                                    symbol<br />
+                                    {nft.symbol}<br />
+                                    <br />
+                                    <img src={nft.image} alt={nft.name} className="card-img-top" />
+                                    <br />
+                                    {/*<button onClick={() => burnNFT(nft)} className="btn btn-danger mt-3">*/}
+                                    {/*    Burn NFT*/}
+                                    {/*</button>*/}
+                                </div>
                             </div>
                         </div>
+                    ))
+                ) : (
+                    <div className="col">
+                        <h2>No Cryptobots found.</h2>
                     </div>
-                ))
-            ) : (
-                <p>Loading NFTs...</p>
-            )}
+                )}
+            </div>
         </div>
     );
 };

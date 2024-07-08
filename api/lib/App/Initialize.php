@@ -6,8 +6,10 @@ use App\Action\Actions\GetAllHashes;
 use App\Action\Actions\GetBalance;
 use App\Action\Actions\HasHash;
 use App\Action\Actions\HomeAction;
+use App\Action\Actions\MintNFT;
 use App\Action\Actions\PushWalletAddress;
 use App\Action\Actions\SetBalance;
+use App\Action\Actions\UploadMetadata;
 use App\Action\BaseAction;
 use App\Object\BaseObject;
 use App\Object\ObjectManager;
@@ -63,6 +65,10 @@ class Initialize extends BaseObject
             return new HasHash();
         } elseif ($get['action'] === 'get-all-hashes') {
             return new GetAllHashes();
+        } elseif ($get['action'] === 'upload-metadata') {
+            return new UploadMetadata();
+        } elseif ($get['action'] === 'mint-nft') {
+            return new MintNFT();
         }
 
         exit(json_encode(['error' => 'Action not found.']));

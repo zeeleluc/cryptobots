@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import WalletConnect from './WalletConnect';
 import NFTList from './NFTList';
+import MintNFT from './MintNFT';
 import './bootstrap.min.css';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
@@ -21,7 +22,15 @@ if (!sessionId) {
 ReactDOM.render(
     <React.StrictMode>
         <WalletConnect>
+            <div className="container-fluid">
+                <div className="row">
+                    <div className="col">
+                        <h1>Cryptobots</h1>
+                    </div>
+                </div>
+            </div>
             <NFTList />
+            <MintNFT /> {/* Integrate MintNFT component here */}
         </WalletConnect>
     </React.StrictMode>,
     document.getElementById('root')

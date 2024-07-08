@@ -14,19 +14,9 @@ class HasHash extends BaseAction
             ];
         }
 
-        $allHashes = $this->getAllHashes();
+        $allHashes = $this->getTokenHashQuery()->getAllHashes();
         return [
             'has_hash' => in_array($hash, $allHashes),
         ];
-    }
-
-    private function getAllHashes()
-    {
-        if ($hashes = $this->getSession()->getItem('all-hashes')) {
-            return $hashes;
-        }
-
-        $allHashes = $this->getTokenHashQuery()->getAllHashes();
-        $this->getSession()->setSession('all-hashes', $allHashes);
     }
 }

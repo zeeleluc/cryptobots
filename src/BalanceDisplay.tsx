@@ -60,13 +60,13 @@ const BalanceDisplay: React.FC<BalanceDisplayProps> = ({ address }) => {
     }, [address]);
 
     return (
-        <div>
+        <p className="balance">
             {balance !== null ? (
-                <p>Balance: {balance} SOL</p>
+                <strong>{balance} SOL</strong>
             ) : (
-                <p>Loading balance...</p>
+                <strong>Loading balance...</strong>
             )}
-        </div>
+        </p>
     );
 };
 

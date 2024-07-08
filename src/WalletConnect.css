@@ -1,5 +1,10 @@
-.App {
-  height: 100px;
-  text-align: right;
-  background: red;
+.wallet-adapter-dropdown {
+
+}
+p.balance {
+    display: unset;
+    margin-left: 10px;
+}
+p.balance strong {
+    margin-top: -10px;
 }
