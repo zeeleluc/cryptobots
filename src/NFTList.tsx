@@ -7,6 +7,7 @@ import { useWallet } from '@solana/wallet-adapter-react';
 const NFTList: React.FC = () => {
     const [nfts, setNFTs] = useState<any[] | null>(null);
     const [loading, setLoading] = useState<boolean>(true);
+    const [walletConnected, setWalletConnected] = useState<boolean>(false);
     const connection = new Connection('https://mainnet.helius-rpc.com/?api-key=' + process.env.HELIUS_API_KEY); // Update with your preferred RPC endpoint
     const { publicKey, signTransaction } = useWallet();
 
@@ -16,8 +17,12 @@ const NFTList: React.FC = () => {
                 const walletAddress = localStorage.getItem('walletAddress');
                 if (!walletAddress) {
                     console.error('Wallet address not found in local storage');
+                    setWalletConnected(false);
+                    setLoading(false);
                     return;
                 }
+
+                setWalletConnected(true);
 
                 const options = { address: walletAddress };
                 const response = await Moralis.SolApi.account.getNFTs(options);
@@ -102,12 +107,18 @@ const NFTList: React.FC = () => {
 
     return (
         <div className="container-fluid">
-            <div className="row">
+            <div className="row justify-content-center">
                 {loading ? (
-                    <div className="col">
-                        <h2>Loading Cryptobots...</h2>
-                    </div>
-                ) : nfts && nfts.length > 0 ? (
+                    walletConnected ? (
+                        <div className="col">
+                            <p>Loading...</p>
+                        </div>
+                    ) : (
+                        <div className="col">
+                            <p>Connect your wallet with the button above</p>
+                        </div>
+                    )
+                ) : walletConnected && nfts && nfts.length > 0 ? (
                     nfts.map((nft: any, index: number) => (
                         <div className="col col-lg-2 col-12 col-md-6 mb-3" key={index}>
                             <div className="card">
@@ -117,32 +128,6 @@ const NFTList: React.FC = () => {
                                     </h2>
                                 </div>
                                 <div className="card-body">
-                                    {/*<table className="table">*/}
-                                    {/*    <tbody>*/}
-                                        {/*<tr>*/}
-                                        {/*    <td>associatedTokenAddress</td>*/}
-                                        {/*    <td>{nft.associatedTokenAddress}</td>*/}
-                                        {/*</tr>*/}
-                                        {/*<tr>*/}
-                                        {/*    <td>mint</td>*/}
-                                        {/*    <td>{nft.mint}</td>*/}
-                                        {/*</tr>*/}
-                                        {/*<tr>*/}
-                                        {/*    <td>symbol</td>*/}
-                                        {/*    <td>{nft.metadata.symbol}</td>*/}
-                                        {/*</tr>*/}
-                                        {/*<tr>*/}
-                                        {/*    <td>description</td>*/}
-                                        {/*    <td>{nft.metadata.description}</td>*/}
-                                        {/*</tr>*/}
-                                        {/*{nft.metadata.attributes.map((attr: any, i: number) => (*/}
-                                        {/*    <tr key={i}>*/}
-                                        {/*        <td>{attr.trait_type}</td>*/}
-                                        {/*        <td>{attr.value}</td>*/}
-                                        {/*    </tr>*/}
-                                        {/*))}*/}
-                                    {/*    </tbody>*/}
-                                    {/*</table>*/}
                                     <img src={`${process.env.V2_URL}${nft.id}.jpg`} alt={nft.metadata.name} className="card-img-top" />
                                     <button className="btn btn-default disabled mt-3">
                                         Morph to V2 (soon)
@@ -154,9 +139,13 @@ const NFTList: React.FC = () => {
                             </div>
                         </div>
                     ))
+                ) : walletConnected ? (
+                    <div className="col">
+                        <p>Loading...</p>
+                    </div>
                 ) : (
                     <div className="col">
-                        <h2>No Cryptobots found.</h2>
+                        <p>Connect your wallet with the button above</p>
                     </div>
                 )}
             </div>

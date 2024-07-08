@@ -25,7 +25,8 @@ ReactDOM.render(
             <div className="container-fluid">
                 <div className="row">
                     <div className="col">
-                        <h1>Cryptobots</h1>
+                        <h1>Cryptobots Morph</h1>
+                        <p>Morph your Cryptobot V1 to V2</p>
                     </div>
                 </div>
             </div>

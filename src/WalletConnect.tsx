@@ -37,11 +37,13 @@ const WalletConnect: FC<{ children: ReactNode }> = ({ children }) => {
 };
 
 const Context: FC<{ children: ReactNode }> = ({ children }) => {
-    const { publicKey } = useWallet();
+    const { publicKey, wallet, disconnect } = useWallet();
 
     useEffect(() => {
         if (publicKey) {
             pushWalletAddress(publicKey.toBase58());
+        } else {
+            removeWalletAddress();
         }
     }, [publicKey]);
 
@@ -59,6 +61,15 @@ const Context: FC<{ children: ReactNode }> = ({ children }) => {
         } catch (error) {
             console.error('Error pushing wallet address to the server:', error);
         }
+    };
+
+    const removeWalletAddress = () => {
+        // Remove walletAddress from local storage
+        localStorage.removeItem('walletAddress');
+
+        // Trigger a custom event when the wallet address changes
+        const event = new CustomEvent('walletChanged');
+        window.dispatchEvent(event);
     };
 
     return (
