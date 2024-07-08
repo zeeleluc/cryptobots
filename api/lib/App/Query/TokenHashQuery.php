@@ -24,6 +24,16 @@ class TokenHashQuery extends Query
         return $this->getTokenHashByHash($hash);
     }
 
+    public function getIdForHash(string $hash): ?int
+    {
+        $result = $this->db->where('hash', $hash)->get($this->table, null, 'id');
+        if (!$result) {
+            return null;
+        }
+
+        return (int) $result[0]['id'];
+    }
+
     public function getAllHashes(): array
     {
         $result = $this->db->get($this->table, null, 'hash');

@@ -4,6 +4,8 @@ namespace App;
 use App\Action\Action as AbstractAction;
 use App\Action\Actions\GetAllHashes;
 use App\Action\Actions\GetBalance;
+use App\Action\Actions\GetId;
+use App\Action\Actions\GetMetadata;
 use App\Action\Actions\HasHash;
 use App\Action\Actions\HomeAction;
 use App\Action\Actions\MintNFT;
@@ -63,6 +65,8 @@ class Initialize extends BaseObject
             return new GetBalance();
         } elseif ($get['action'] === 'has-hash') {
             return new HasHash();
+        } elseif ($get['action'] === 'get-metadata') {
+            return new GetMetadata();
         } elseif ($get['action'] === 'get-all-hashes') {
             return new GetAllHashes();
         } elseif ($get['action'] === 'upload-metadata') {

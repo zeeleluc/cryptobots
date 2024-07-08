@@ -30,7 +30,13 @@ const NFTList: React.FC = () => {
                     const metadataUrl = `${process.env.APP_API_URL}/has-hash/${mint}`;
                     const result = await fetch(metadataUrl);
                     const data = await result.json();
-                    return data.has_hash ? nft : null;
+                    if (data.has_hash) {
+                        const id = nft.name.split('#')[1];
+                        const metadataResponse = await fetch(`${process.env.APP_API_URL}/get-metadata/${id}`);
+                        const metadata = await metadataResponse.json();
+                        return { ...nft, metadata, id };
+                    }
+                    return null;
                 }));
 
                 const validNFTs = filteredNFTs.filter((nft: any) => nft !== null);
@@ -103,21 +109,44 @@ const NFTList: React.FC = () => {
                     </div>
                 ) : nfts && nfts.length > 0 ? (
                     nfts.map((nft: any, index: number) => (
-                        <div className="col col-md-4 mb-4" key={index}>
+                        <div className="col col-lg-2 col-12 col-md-6 mb-3" key={index}>
                             <div className="card">
-                                <div className="card-header">{nft.name}</div>
+                                <div className="card-header">
+                                    <h2>
+                                        {nft.metadata.name}
+                                    </h2>
+                                </div>
                                 <div className="card-body">
-                                    associatedTokenAddress<br />
-                                    {nft.associatedTokenAddress}<br />
-                                    <br />
-                                    mint<br />
-                                    {nft.mint}<br />
-                                    <br />
-                                    symbol<br />
-                                    {nft.symbol}<br />
-                                    <br />
-                                    <img src={nft.image} alt={nft.name} className="card-img-top" />
-                                    <br />
+                                    {/*<table className="table">*/}
+                                    {/*    <tbody>*/}
+                                        {/*<tr>*/}
+                                        {/*    <td>associatedTokenAddress</td>*/}
+                                        {/*    <td>{nft.associatedTokenAddress}</td>*/}
+                                        {/*</tr>*/}
+                                        {/*<tr>*/}
+                                        {/*    <td>mint</td>*/}
+                                        {/*    <td>{nft.mint}</td>*/}
+                                        {/*</tr>*/}
+                                        {/*<tr>*/}
+                                        {/*    <td>symbol</td>*/}
+                                        {/*    <td>{nft.metadata.symbol}</td>*/}
+                                        {/*</tr>*/}
+                                        {/*<tr>*/}
+                                        {/*    <td>description</td>*/}
+                                        {/*    <td>{nft.metadata.description}</td>*/}
+                                        {/*</tr>*/}
+                                        {/*{nft.metadata.attributes.map((attr: any, i: number) => (*/}
+                                        {/*    <tr key={i}>*/}
+                                        {/*        <td>{attr.trait_type}</td>*/}
+                                        {/*        <td>{attr.value}</td>*/}
+                                        {/*    </tr>*/}
+                                        {/*))}*/}
+                                    {/*    </tbody>*/}
+                                    {/*</table>*/}
+                                    <img src={`${process.env.V2_URL}${nft.id}.jpg`} alt={nft.metadata.name} className="card-img-top" />
+                                    <button className="btn btn-default disabled mt-3">
+                                        Morph to V2 (soon)
+                                    </button>
                                     {/*<button onClick={() => burnNFT(nft)} className="btn btn-danger mt-3">*/}
                                     {/*    Burn NFT*/}
                                     {/*</button>*/}

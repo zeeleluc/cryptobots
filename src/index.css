@@ -9,8 +9,28 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+h1 {
+  margin: 20px 0;
+  font-size: 40px;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.card,
+.card .card-header,
+.card .card-body,
+.card .card-footer {
+  border: none;
+  text-align: center;
+  background-color: #322196;
+}
+.card .card-header {
+  font-size: 24px;
+}
+.card .card-body img {
+
+}
+.card .card-header h2 {
+  margin: 0;
 }
