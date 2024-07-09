@@ -63,6 +63,6 @@ class Initialize extends BaseObject
             return new TokenAction();
         }
 
-        throw new \Exception('Page not found.');
+        return new HomeAction();
     }
 }
