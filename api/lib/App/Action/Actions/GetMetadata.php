@@ -2,6 +2,7 @@
 namespace App\Action\Actions;
 
 use App\Action\BaseAction;
+use App\Service\Metadata;
 
 class GetMetadata extends BaseAction
 {
@@ -14,14 +15,6 @@ class GetMetadata extends BaseAction
             ];
         }
 
-        $metadata = file_get_contents(env('METADATA_URL') . $id . '.json');
-        if (!$metadata) {
-            return [
-                'error' => 'Not found.',
-            ];
-        }
-
-        return (array) json_decode($metadata, true);
-
+        return (new Metadata())->get($id);
     }
 }

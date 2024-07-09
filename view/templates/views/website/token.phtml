@@ -1,0 +1,55 @@
+
+<div class="container">
+
+    <div class="row">
+        <div class="col col-12">
+            <h2><?=$token->name; ?></h2>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+
+        <div class="col col-6 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    V1
+                </div>
+                <div class="card-content">
+                    <img class="img-fluid" src="<?=$token->imageV1; ?>" />
+                </div>
+            </div>
+        </div>
+
+        <div class="col col-6 col-lg-3">
+            <div class="card">
+                <div class="card-header">
+                    V2
+                </div>
+                <div class="card-content">
+                    <img class="img-fluid" src="<?=$token->imageV2; ?>" />
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row justify-content-center mt-3">
+        <div class="col col-6 col-lg-3 text-end">
+            <?php if ($urlPrevious): ?>
+                <a href="<?=$urlPrevious; ?>" class="btn btn-primary">
+                    Previous
+                </a>
+            <?php endif; ?>
+        </div>
+        <div class="col col-6 col-lg-3 text-start">
+            <?php if ($urlNext): ?>
+                <a href="<?=$urlNext; ?>" class="btn btn-primary">
+                    Next
+                </a>
+            <?php endif; ?>
+        </div>
+    </div>
+
+</div>
+
+

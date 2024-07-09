@@ -1,0 +1,63 @@
+
+@font-face {
+    font-family: 'botsmatic_demoregular';
+    src: url('../fonts/botsmaticregulardemo-webfont.eot');
+    src: url('../fonts/botsmaticregulardemo-webfont.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/botsmaticregulardemo-webfont.woff2') format('woff2'),
+    url('../fonts/botsmaticregulardemo-webfont.woff') format('woff'),
+    url('../fonts/botsmaticregulardemo-webfont.ttf') format('truetype'),
+    url('../fonts/botsmaticregulardemo-webfont.svg#botsmatic_demoregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+body {
+    background-color: #031a3b;
+    text-align: center;
+    color: #efefef;
+}
+
+h1 {
+    font-family: 'botsmatic_demoregular', sans-serif;
+    color: #0dcaf0;
+    font-size: 50px;
+    margin: 30px 0;
+}
+
+.card {
+    margin: 10px 0;
+}
+
+.card,
+.card .card-header,
+.card .card-content,
+.card .card-footer {
+    border: none;
+    background: #96ecff;
+    border-radius: 0;
+    color: black;
+    padding: 0;
+}
+
+.card .card-header {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.btn.btn-primary {
+    font-family: 'botsmatic_demoregular', sans-serif;
+    background: unset;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-color: #10CAF0;
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 26px;
+    }
+    .btn.btn-primary {
+        font-size: 14px;
+    }
+}

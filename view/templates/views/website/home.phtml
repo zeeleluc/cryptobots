@@ -1,0 +1,23 @@
+
+<div class="container">
+    <div class="row">
+        <?php foreach ($tokens as $token): ?>
+
+            <div class="col col-3">
+                <div class="card">
+                    <div class="card-header">
+                        <?=$token->name; ?>
+                    </div>
+                    <div class="card-content">
+                        <a href="<?=$token->viewUrl; ?>">
+                            <img class="img-fluid" src="<?=$token->imageV2; ?>" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
