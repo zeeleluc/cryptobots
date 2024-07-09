@@ -21,12 +21,25 @@
 <body>
 
     <header>
-        <h1>CryptoBots Viewer</h1>
+        <h1><?=$htmlTitle; ?></h1>
     </header>
 
     <main>
         <?=$content; ?>
     </main>
+
+    <footer>
+        CryptoBots is an NFT collection on Solana created by <a target="_blank" href="https://x.com/0xEDDB">Ed</a>
+
+        <br />
+        <hr />
+
+        <small>
+            This website is powered and maintained by <a target="_blank" href="https://hasmints.com">HasMints</a>
+            <br />
+            &copy; <?=date('Y'); ?>
+        </small>
+    </footer>
 
 </body>
 

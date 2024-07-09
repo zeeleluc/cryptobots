@@ -18,6 +18,28 @@ body {
     color: #efefef;
 }
 
+main {
+    background-color: #10356b;
+    padding: 20px 0;
+    border-top: 1px solid #0c4d5b;
+}
+
+footer {
+    color: #0dcaf0;
+    padding: 20px 0;
+}
+footer a {
+    font-weight: bold;
+    color: #0dcaf0;
+}
+footer small {
+    color: #0c93ae;
+}
+footer small a {
+    font-weight: bold;
+    color: #0c93ae;
+}
+
 h1 {
     font-family: 'botsmatic_demoregular', sans-serif;
     color: #0dcaf0;
