@@ -141,7 +141,7 @@ const NFTList: React.FC = () => {
                     ))
                 ) : walletConnected ? (
                     <div className="col">
-                        <p>Loading...</p>
+                        {/*<p>Loading...</p>*/}
                     </div>
                 ) : (
                     <div className="col">
