@@ -21,7 +21,11 @@
 <body>
 
     <header>
-        <h1><?=$htmlTitle; ?></h1>
+        <h1>
+            <a href="<?=env('APP_VIEW_URL'); ?>">
+                <?=$htmlTitle; ?>
+            </a>
+        </h1>
     </header>
 
     <main>
@@ -29,7 +33,7 @@
     </main>
 
     <footer>
-        CryptoBots is an NFT collection on Solana created by <a target="_blank" href="https://x.com/0xEDDB">Ed</a>
+        <a target="_blank" href="https://x.com/cryptobotsnfts">CryptoBots</a> is an NFT collection on Solana created by <a target="_blank" href="https://x.com/0xEDDB">Ed</a>
 
         <br />
         <hr />
