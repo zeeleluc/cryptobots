@@ -1,6 +1,20 @@
+
+@font-face {
+  font-family: 'botsmatic_demoregular';
+  src: url('fonts/botsmaticregulardemo-webfont.eot');
+  src: url('fonts/botsmaticregulardemo-webfont.eot?#iefix') format('embedded-opentype'),
+  url('fonts/botsmaticregulardemo-webfont.woff2') format('woff2'),
+  url('fonts/botsmaticregulardemo-webfont.woff') format('woff'),
+  url('fonts/botsmaticregulardemo-webfont.ttf') format('truetype'),
+  url('fonts/botsmaticregulardemo-webfont.svg#botsmatic_demoregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+
+}
+
 body {
-  background: #1f0f72;
-  color: #ffffff;
+  background-color: #031a3b;
+  color: #efefef;
   text-align: center;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -10,8 +24,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 h1 {
-  margin: 20px 0 0 0;
-  font-size: 40px;
+  font-family: 'botsmatic_demoregular', sans-serif;
+  color: #0dcaf0;
+  font-size: 50px;
+  margin: 30px 0;
+  text-decoration: none;
 }
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -23,7 +40,7 @@ code {
 .card .card-footer {
   border: none;
   text-align: center;
-  background-color: #322196;
+  background-color: #10356b;
 }
 .card .card-header {
   font-size: 24px;
@@ -33,4 +50,21 @@ code {
 }
 .card .card-header h2 {
   margin: 0;
+}
+
+
+footer {
+  color: #0dcaf0;
+  padding: 20px 0;
+}
+footer a {
+  font-weight: bold;
+  color: #0dcaf0;
+}
+footer small {
+  color: #0c93ae;
+}
+footer small a {
+  font-weight: bold;
+  color: #0c93ae;
 }

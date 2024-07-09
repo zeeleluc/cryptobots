@@ -33,6 +33,18 @@ ReactDOM.render(
             <NFTList />
             <MintNFT /> {/* Integrate MintNFT component here */}
         </WalletConnect>
+
+        <footer>
+            <a target="_blank" href="https://x.com/cryptobotsnfts">CryptoBots</a> is an NFT collection on Solana created by <a target="_blank" href="https://x.com/0xEDDB">Ed</a>
+
+            <br />
+            <hr />
+
+            <small>
+                This dApp is powered and maintained by <a target="_blank" href="https://hasmints.com">HasMints</a>
+            </small>
+        </footer>
+
     </React.StrictMode>,
     document.getElementById('root')
 );

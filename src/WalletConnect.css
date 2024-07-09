@@ -1,7 +1,9 @@
 .wallet-adapter-dropdown {
-
+    width: 100%;
+    background-color: #512DA8;
 }
 p.balance {
-    margin: 10px;
-    font-size: 12px;
+    margin: 6px 25px;
+    font-size: 14px;
+    text-align: left;
 }

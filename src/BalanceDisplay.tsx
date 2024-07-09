@@ -64,7 +64,7 @@ const BalanceDisplay: React.FC<BalanceDisplayProps> = ({ address }) => {
             {balance !== null ? (
                 <strong>{balance} SOL</strong>
             ) : (
-                <strong>Loading balance...</strong>
+                <strong>Loading...</strong>
             )}
         </p>
     );

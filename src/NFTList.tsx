@@ -128,7 +128,7 @@ const NFTList: React.FC = () => {
                                     </h2>
                                 </div>
                                 <div className="card-body">
-                                    <img src={`${process.env.V2_URL}${nft.id}.jpg`} alt={nft.metadata.name} className="card-img-top" />
+                                    <img src={`${process.env.V1_URL}${nft.metadata.image.replace(/^\//, '')}`} alt={nft.metadata.name} className="card-img-top" />
                                     <button className="btn btn-default disabled mt-3">
                                         Morph to V2 (soon)
                                     </button>
