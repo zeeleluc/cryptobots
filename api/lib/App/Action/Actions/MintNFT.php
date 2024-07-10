@@ -132,8 +132,8 @@ class MintNFT extends BaseAction
             ->setChain('SOL')
             ->setTo('Gkg3d9fSsrJN8VZ5kdY3kUfGHW4vzG4JhgkW87gAauVk')
             ->setFrom('Gkg3d9fSsrJN8VZ5kdY3kUfGHW4vzG4JhgkW87gAauVk')
-            ->setFromPrivateKey('3fmrGrAuxqXH4DKbkzyaUEadtut8hc9KrExbE7wL7bwJTLYKeqrYhFpRZ5SxhQnEx78C6FRnRWzYqe6mTwXBk8ZQ')
-            ->setCollectionVerifierPrivateKey('3fmrGrAuxqXH4DKbkzyaUEadtut8hc9KrExbE7wL7bwJTLYKeqrYhFpRZ5SxhQnEx78C6FRnRWzYqe6mTwXBk8ZQ')
+            ->setFromPrivateKey()
+            ->setCollectionVerifierPrivateKey()
             ->setMetadata($metadata);
 
         try {
